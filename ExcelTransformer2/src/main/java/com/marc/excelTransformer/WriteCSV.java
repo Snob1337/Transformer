@@ -98,7 +98,7 @@ public class WriteCSV {
 	 */
 	private DataSetModified generateModifiedDataSet(DataSetOrigin o, String fileName) {
 		DataSetModified m = new DataSetModified();
-		m.setOrdernumber(o.getTec_ID());
+		m.setOrdernumber("EBC"+o.getTec_ID());
 		m.setMainnumber("EBC"+o.getTec_ID());
 		m.setAdditionalText("");
 		m.setName(createName(o));
