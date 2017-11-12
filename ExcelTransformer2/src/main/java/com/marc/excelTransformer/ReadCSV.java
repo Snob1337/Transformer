@@ -21,7 +21,7 @@ import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
  */
 public class ReadCSV {
 
-	public ReadCSV(String sourceFolderPath, String sourceFileName, String targetFolder, String pictureURL) throws IOException {
+	public ReadCSV(String sourceFolderPath, String sourceFileName, String targetFolder) throws IOException {
 
 		List<DataSetOrigin> dsList = new ArrayList<>();
 
@@ -51,7 +51,7 @@ public class ReadCSV {
 
 		String json = new Gson().toJson(dsList);
 		try {
-			new WriteCSV(json, sourceFileName, targetFolder, pictureURL);
+			new WriteCSV(json, sourceFileName, targetFolder);
 		} catch (CsvDataTypeMismatchException e) {
 			e.printStackTrace();
 		} catch (CsvRequiredFieldEmptyException e) {

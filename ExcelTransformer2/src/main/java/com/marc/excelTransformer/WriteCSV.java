@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import org.supercsv.cellprocessor.ift.CellProcessor;
 import org.supercsv.io.CsvBeanWriter;
@@ -27,7 +28,7 @@ import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
  */
 public class WriteCSV {
 
-	public WriteCSV(String json, String fileName, String targetFolder, String pictureURL)
+	public WriteCSV(String json, String fileName, String targetFolder)
 			throws CsvDataTypeMismatchException, CsvRequiredFieldEmptyException {
 
 		List<DataSetModified> modList = new ArrayList<>();
@@ -35,7 +36,7 @@ public class WriteCSV {
 
 		DataSetOrigin[] fromJson = new Gson().fromJson(json, DataSetOrigin[].class);
 		for (DataSetOrigin o : fromJson) {
-			DataSetModified generatedModifiedDataSet = generateModifiedDataSet(o, pictureURL);
+			DataSetModified generatedModifiedDataSet = generateModifiedDataSet(o, fileName);
 
 			modList.add(generatedModifiedDataSet);
 		}
@@ -92,13 +93,13 @@ public class WriteCSV {
 	 * sets the edited values from the original csv file to modified file
 	 * 
 	 * @param o
-	 * @param pictureURL 
+	 * @param fileName 
 	 * @return
 	 */
-	private DataSetModified generateModifiedDataSet(DataSetOrigin o, String pictureURL) {
+	private DataSetModified generateModifiedDataSet(DataSetOrigin o, String fileName) {
 		DataSetModified m = new DataSetModified();
 		m.setOrdernumber(o.getTec_ID());
-		m.setMainnumber(o.getTec_ID());
+		m.setMainnumber("EBC"+o.getTec_ID());
 		m.setAdditionalText("");
 		m.setName(createName(o));
 		m.setSupplier("EBC-Brakes");
@@ -108,7 +109,7 @@ public class WriteCSV {
 		float multiplier = 0.9f;
 		float preisBrutto = Float.valueOf(o.getPreis_brutto());
 		float price = preisBrutto * multiplier;
-		m.setPrice_EK(String.format("%.2f", price)); // Preis Brutto*0,9
+		m.setPrice_EK(String.format(Locale.ROOT, "%.2f", price)); // Preis Brutto*0,9
 
 		m.setPseudoprice_EK(o.getPreis_brutto());
 		m.setBaseprice_EK("");
@@ -150,7 +151,7 @@ public class WriteCSV {
 		m.setPropertyGroupName("Fahrzeug");
 		m.setPropertyValueName(generatePropValueName(o));
 		m.setAccessory("");
-		m.setImageUrl(o.getBildpfad_kategorie());
+		m.setImageUrl(App._pictureAssignment.get(fileName));
 		m.setMain("");
 		m.setAttr1("");
 		m.setAttr2("");
@@ -255,7 +256,7 @@ public class WriteCSV {
 		 String einbauort = o.getEinbauort() != null ? o.getEinbauort() : "";
 		
 		
-		 propNameValue += "Marke: "+marke+"|Modell: "+modell+"|Ausfuehrung: "+ausfuehrung+"|Baujahr: "+baujahr+"|Einbauort: "+einbauort;
+		 propNameValue += "Marke:"+marke+"|Modell:"+modell+"|Ausfuehrung:"+ausfuehrung+"|Baujahr:"+baujahr+"|Einbauort:"+einbauort;
 		 
 		 
 		return propNameValue;
