@@ -120,7 +120,7 @@ public class WriteCSV {
 		m.setInstock(20);
 		m.setStockmin("5");
 		m.setDescription(o.getKurzbeschreibung());
-		m.setDescription_long(createDescLong(o));
+		m.setDescription_long(o.getKurzbeschreibung() + "<br><br>" + createDescLong(o));
 		m.setShippingtime("90");
 		m.setAdded(getDate());
 		m.setChanged("");
@@ -203,9 +203,9 @@ public class WriteCSV {
 		descLong += "Passend für folgendes Fahrzeug: <br> " + "Marke: " + o.getMarke() + " <br> Modell: "
 				+ o.getModell() + " <br> Aufbauart: " + o.getAufbauart() + " <br> Modell Baujahr: " + o.getModell_BJ()
 				+ " <br> Fahrzeug Baujahr: " + o.getFhz_BJ() + " <br>  Leistung: " + o.getKw() + "KW / " + o.getPs()
-				+ "PS <br> Hubraum: " + o.getHubraum() + " <br> HSN - TSN: " + o.getHsn_tsn() + " <br>" + " Motorcode: "
+				+ "PS <br> Hubraum: " + o.getHubraum() + " <br> HSN - TSN: " + (o.getHsn_tsn() != null ? o.getHsn_tsn() : "nicht verfügbar") + " <br>" + " Motorcode: "
 				+ o.getMotorcode() + " <br> Antrieb: " + o.getAntrieb() + " <br> Zusatz: " + o.getZusatz()
-				+ " <br> Zulassung: " + o.getZulassung() + "<br<br> Kurzbeschreibung: " + o.getLangbeschreibung();
+				+ " <br> Zulassung: " + (o.getZulassung() != null ? o.getZulassung() : "ohne Zulassung") + "<br><br> Kurzbeschreibung: " + o.getLangbeschreibung();
 
 		return descLong;
 	}

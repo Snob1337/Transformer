@@ -26,6 +26,7 @@ import org.apache.commons.cli.Options;
 public class App {
 
 	public static Map<String, String> _pictureAssignment = new HashMap<>();
+	public static int counter = 0;
 
 	private static void initialize(String pathConfig) throws IOException {
 
@@ -53,7 +54,7 @@ public class App {
 		readCSVForAllFilesInFolder(folder, sourcePath, targetFolder);
 
 		System.out.println("\n\n++++++++++++++++++++++++++++++++++++++++++++\n\nDas umwandeln der Dateien wurde erfolgreich beendet. \nDie Dateien liegen im Verzeichnis "
-				+ targetFolder + ".\n\n++++++++++++++++++++++++++++++++++++++++++++");
+				+ targetFolder + ".\n\n++++++++++++++++++++++++++++++++++++++++++++\n\n count:" + counter);
 		
 	}
 

@@ -42,7 +42,7 @@ public class ReadCSV {
 		for (Object dataSet : parse) {
 			if (dataSet instanceof DataSetOrigin) {
 				DataSetOrigin ds = (DataSetOrigin) dataSet;
-
+				App.counter++;
 				System.out.println(ds.toString());
 				dsList.add(ds);
 
