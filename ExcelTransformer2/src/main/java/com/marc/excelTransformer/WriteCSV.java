@@ -98,8 +98,12 @@ public class WriteCSV {
 	 */
 	private DataSetModified generateModifiedDataSet(DataSetOrigin o, String fileName) {
 		DataSetModified m = new DataSetModified();
-		m.setOrdernumber("EBC"+o.getTec_ID());
-		m.setMainnumber("EBC"+o.getTec_ID());
+		
+		App.EBCIDcounter++;
+		String ebcTecID = String.format("%05d", App.EBCIDcounter);
+		
+		m.setOrdernumber("EBC"+ebcTecID);
+		m.setMainnumber("EBC"+ebcTecID);
 		m.setAdditionalText("");
 		m.setName(createName(o));
 		m.setSupplier("EBC-Brakes");
@@ -215,6 +219,7 @@ public class WriteCSV {
 	 * (Textbaustein) - Einbauort - Marke Model Ausführung Modell-BJ ///
 	 * ergibt EBC Black Dash-Disc – Hinterachse - Volvo 940 2.0 90-94
 	 * 
+	 * Marke Model Ausführung ps modelbj 
 	 * @param o
 	 * @return
 	 */
@@ -222,7 +227,7 @@ public class WriteCSV {
 
 		String name = "";
 		name += "EBC " + getKurzbeschreibungFirstPart(o.getKurzbeschreibung()) + " - " + o.getEinbauort() + " - "
-				+ o.getMarke() + " " + o.getModell() + " " + o.getPs() + "PS " + o.getAusfuehrung() + " "
+				+ o.getMarke() + " " + o.getModell() + " " + o.getAusfuehrung() + " " + o.getPs() + "PS " 
 				+ o.getModell_BJ();
 
 		return name;

@@ -27,6 +27,7 @@ public class App {
 
 	public static Map<String, String> _pictureAssignment = new HashMap<>();
 	public static int counter = 0;
+	public static int EBCIDcounter = 0;
 
 	private static void initialize(String pathConfig) throws IOException {
 
